@@ -3,6 +3,7 @@ package com.fobctech.dscommerce.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,14 @@ public class Users {
     private String password;
     private List<String> roles;
 
-    public Users(){
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
+    public Users() {
 
     }
-    public Users(long id, String names, String email, String phone, LocalDate birthDate, String password, List<String> roles) {
+
+    public Users(long id, String names, String email, String phone, LocalDate birthDate, String password, List<String> roles, List<Order> orders) {
         this.id = id;
         this.names = names;
         this.email = email;
@@ -30,6 +35,7 @@ public class Users {
         this.birthDate = birthDate;
         this.password = password;
         this.roles = roles;
+        this.orders = orders;
     }
 
     public long getId() {
@@ -86,5 +92,9 @@ public class Users {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }
