@@ -13,7 +13,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String names;
+    private String name;
     @Column(unique = true)
     private String email;
     private String phone;
@@ -30,7 +30,7 @@ public class Users {
 
     public Users(long id, String names, String email, String phone, LocalDate birthDate, String password, List<String> roles, List<Order> orders) {
         this.id = id;
-        this.names = names;
+        this.name = names;
         this.email = email;
         this.phone = phone;
         this.birthDate = birthDate;
@@ -48,11 +48,11 @@ public class Users {
     }
 
     public String getNames() {
-        return names;
+        return name;
     }
 
     public void setNames(String names) {
-        this.names = names;
+        this.name = names;
     }
 
     public String getEmail() {
