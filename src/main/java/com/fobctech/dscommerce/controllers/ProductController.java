@@ -3,6 +3,7 @@ package com.fobctech.dscommerce.controllers;
 import com.fobctech.dscommerce.dto.ProductDTO;
 
 import com.fobctech.dscommerce.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +34,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> insertNewProdusct(@RequestBody ProductDTO dto){
+    public ResponseEntity<ProductDTO> insertNewProdusct(@Valid @RequestBody ProductDTO dto){
 
         dto = productService.insertNewProduct(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -44,14 +45,14 @@ public class ProductController {
     }
 
     @PutMapping( value = "/{id}")
-    public ResponseEntity<ProductDTO> updateProdusct(@PathVariable Long id, @RequestBody ProductDTO dto){
+    public ResponseEntity<ProductDTO> updateProdusct(@PathVariable Long id, @Valid @RequestBody ProductDTO dto){
         dto = productService.updateProduct(id, dto);
         return ResponseEntity.ok(dto);
 
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteProduc(@PathVariable Long id){
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
 
